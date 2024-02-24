@@ -1,15 +1,17 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:pocketbase/pocketbase.dart';
+//import 'package:http/http.dart' as http;
 
 // Enumeración para representar los distintos estados
 enum LoginState { Loading, Loaded, Empty, Error }
 
 class LoginProvider extends ChangeNotifier {
-  final pb = PocketBase('http://127.0.0.1:8090');
+  final pb = PocketBase('http://10.0.2.2:8090');
   // Variables para el manejo de estado
   LoginState _estado = LoginState.Empty;
   String _errorMensaje = '';
+  RecordAuth datosUsuario = RecordAuth();
 
   LoginState get estado => _estado;
   String get errorMensaje => _errorMensaje;
@@ -21,13 +23,17 @@ class LoginProvider extends ChangeNotifier {
     // Cambiar el estado a Loading al comenzar la operación
     _cambiarEstado(LoginState.Loading);
 
-    final baseUrl = 'http://127.0.0.1:8090';
-
     try {
       final authData = await pb.collection('users').authWithPassword(
             cedula,
             password,
           );
+
+      datosUsuario = authData;
+
+      // pb.authStore.isValid
+      //     ? _cambiarEstado(LoginState.Loaded)
+      //     : _cambiarEstado(LoginState.Empty);
 
       print(authData);
       print(pb.authStore.isValid);
@@ -37,9 +43,14 @@ class LoginProvider extends ChangeNotifier {
       // Cambiar el estado a Loaded cuando la operación es exitosa
       _cambiarEstado(LoginState.Loaded);
     } catch (error) {
+      if (error is ClientException) {
+        _cambiarEstado(LoginState.Error, error.response['message']);
+      } else {
+        _cambiarEstado(LoginState.Error,
+            'Ocurrió un error desconocido, por favor contáctese con soporte');
+        print(error);
+      }
       // Capturar errores y cambiar el estado a Error
-      _cambiarEstado(LoginState.Error, error.toString());
-      print(error);
     }
   }
 

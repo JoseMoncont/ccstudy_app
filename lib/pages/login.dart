@@ -1,11 +1,13 @@
+import 'package:ccstudy_app/pages/home.dart';
+import 'package:ccstudy_app/widgets/alerts.dart';
 import 'package:ccstudy_app/widgets/botones.dart';
 import 'package:ccstudy_app/widgets/formulario.dart';
+import 'package:ccstudy_app/widgets/generales.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../providers/iniciar_sesion.dart';
+import '../providers/iniciar_sesion_provider.dart';
 import 'crearunacuenta.dart';
-import 'home.dart';
 import 'olvidosucontrasenia.dart';
 
 class LoginPage extends StatelessWidget {
@@ -18,7 +20,7 @@ class LoginPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final loginUsuario = Provider.of<LoginProvider>(context);
     return Scaffold(
-      backgroundColor: const Color(0xff271789),
+      backgroundColor: colorBG,
       body: Container(
         alignment: Alignment.center,
         child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
@@ -36,13 +38,19 @@ class LoginPage extends StatelessWidget {
                 child: Column(
                   children: [
                     InputForm(
-                        hintText: 'Usuario',
-                        controlador: _usuarioController,
-                        obscureText: false),
+                      hintText: 'Cedula',
+                      controlador: _usuarioController,
+                      obscureText: false,
+                      inputType: TextInputType.number,
+                      icono: Icons.person,
+                    ),
                     InputForm(
-                        hintText: 'Contraseña',
-                        controlador: _passwordController,
-                        obscureText: true),
+                      hintText: 'Contraseña',
+                      controlador: _passwordController,
+                      obscureText: true,
+                      inputType: TextInputType.text,
+                      icono: Icons.key,
+                    ),
                     Container(
                       margin: const EdgeInsetsDirectional.symmetric(
                           horizontal: 14.0, vertical: 01.0),
@@ -65,12 +73,20 @@ class LoginPage extends StatelessWidget {
                     BotonPrimario(
                         texto: 'Iniciar Sesión',
                         onPressed: () {
-                          loginUsuario.login(_usuarioController.text,
-                              _passwordController.text);
-                          // Navigator.push(
-                          //     context,
-                          //     MaterialPageRoute(
-                          //         builder: (context) => const Home()));
+                          if (_usuarioController.text.isEmpty ||
+                              _passwordController.text.isEmpty) {
+                            mostrarAlertDialog(context, 'Ups!',
+                                'Necesitas ingresar los datos para iniciar sesión');
+                            null;
+                          } else {
+                            loginUsuario.login(_usuarioController.text,
+                                _passwordController.text);
+
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => const Home()));
+                          }
                         }),
                   ],
                 ),

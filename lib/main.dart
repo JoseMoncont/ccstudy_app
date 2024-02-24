@@ -1,6 +1,6 @@
 import 'package:ccstudy_app/pages/login.dart';
 import 'package:ccstudy_app/providers/crear_usuario_provider.dart';
-import 'package:ccstudy_app/providers/iniciar_sesion.dart';
+import 'package:ccstudy_app/providers/iniciar_sesion_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

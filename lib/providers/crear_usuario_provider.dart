@@ -1,13 +1,12 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:pocketbase/pocketbase.dart';
-import 'package:http/http.dart' as http;
 
 // Enumeración para representar los distintos estados
 enum UsuarioState { Loading, Loaded, Empty, Error }
 
 class GestionUsuarioProvider extends ChangeNotifier {
-  final pb = PocketBase('http://127.0.0.1:8090');
+  final pb = PocketBase('http://10.0.2.2:8090');
   // Variables para el manejo de estado
   UsuarioState _estado = UsuarioState.Empty;
   String _errorMensaje = '';
@@ -16,17 +15,17 @@ class GestionUsuarioProvider extends ChangeNotifier {
   String get errorMensaje => _errorMensaje;
 
   Future<void> crearUsuario(
-    String nombre,
-    String apellidos,
-    String correo,
-    String contrasenia,
-    String confirmContrasenia,
-    String cedula,
-  ) async {
+      String nombre,
+      String apellidos,
+      String correo,
+      String contrasenia,
+      String confirmContrasenia,
+      String cedula,
+      String celular) async {
     // Cambiar el estado a Loading al comenzar la operación
     _cambiarEstado(UsuarioState.Loading);
 
-    final baseUrl = 'http://127.0.0.1:8090';
+    final baseUrl = 'http://10.0.2.2:8090';
 
     final _url = Uri.parse(baseUrl + '/api/collections/users/records');
 
@@ -39,13 +38,13 @@ class GestionUsuarioProvider extends ChangeNotifier {
         "cedula": cedula,
         "nombres": nombre,
         "apellidos": apellidos,
-        "celular": "3216620954",
+        "celular": celular,
       };
 
-      // final record = await pb.collection('users').create(body: body);
-      final resp = await http.post(_url, body: body);
+      final record = await pb.collection('users').create(body: body);
+      //  final resp = await http.post(_url, body: body);
 
-      print(resp);
+      //  print(resp);
 
 // (optional) send an email verification request
       await pb.collection('users').requestVerification(correo);
@@ -53,8 +52,12 @@ class GestionUsuarioProvider extends ChangeNotifier {
       // Cambiar el estado a Loaded cuando la operación es exitosa
       _cambiarEstado(UsuarioState.Loaded);
     } catch (error) {
+      if (error is ClientException) {
+        _cambiarEstado(UsuarioState.Error, error.response['message']);
+      }
       // Capturar errores y cambiar el estado a Error
-      _cambiarEstado(UsuarioState.Error, error.toString());
+      _cambiarEstado(UsuarioState.Error,
+          'Ocurrió un error desconocido, por favor contáctese con soporte');
       print(error);
     }
   }

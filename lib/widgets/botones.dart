@@ -1,6 +1,6 @@
+import 'package:ccstudy_app/widgets/generales.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:line_icons/line_icon.dart';
 
 class BotonPrimario extends StatelessWidget {
   const BotonPrimario(
@@ -15,15 +15,36 @@ class BotonPrimario extends StatelessWidget {
         width: MediaQuery.of(context).size.width,
         child: ElevatedButton(
           onPressed: onPressed,
-          child: Text(
-            texto,
-            style: TextStyle(color: Colors.white, fontSize: 20),
-          ),
           style: ElevatedButton.styleFrom(
-              backgroundColor: Color(0xff040346),
+              backgroundColor: Color.fromARGB(255, 105, 215, 255),
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10))),
+          child: Text(
+            texto,
+            style: const TextStyle(
+                color: colorBG, fontSize: 20, fontWeight: FontWeight.bold),
+          ),
         ));
+  }
+}
+
+class BotonPrimarioCargando extends StatelessWidget {
+  const BotonPrimarioCargando({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+        height: 50,
+        width: MediaQuery.of(context).size.width,
+        child: ElevatedButton(
+            onPressed: null,
+            style: ElevatedButton.styleFrom(
+                backgroundColor: const Color(0xff040346),
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10))),
+            child: CircularProgressIndicator()));
   }
 }
 

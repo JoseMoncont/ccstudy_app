@@ -10,7 +10,7 @@ class Updatedata extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: appBar(),
-      backgroundColor: const Color(0xff271789),
+      backgroundColor: colorBG,
       body: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,

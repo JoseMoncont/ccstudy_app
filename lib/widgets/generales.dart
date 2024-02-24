@@ -15,3 +15,5 @@ appBar() {
         style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
       ));
 }
+
+const colorBG = Color(0xff040346);

@@ -14,6 +14,7 @@ class CrearUnaCuenta extends StatelessWidget {
   final TextEditingController _nombreController = TextEditingController();
   final TextEditingController _apellidosController = TextEditingController();
   final TextEditingController _correoController = TextEditingController();
+  final TextEditingController _celularController = TextEditingController();
   final TextEditingController _contraseniaController = TextEditingController();
   final TextEditingController _confirmcontraseniaController =
       TextEditingController();
@@ -25,19 +26,20 @@ class CrearUnaCuenta extends StatelessWidget {
 
     return Scaffold(
       appBar: appBar(),
-      backgroundColor: const Color(0xff271789),
+      backgroundColor: colorBG,
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Container(
-              margin: const EdgeInsets.symmetric(horizontal: 20),
+              margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
               child: const Text(
-                'Registro',
+                'Registro de usuario',
                 style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 30,
+                    color: Color.fromARGB(255, 234, 255, 166),
+                    fontSize: 25,
                     fontWeight: FontWeight.bold),
+                textAlign: TextAlign.center,
               ),
             ),
             Container(
@@ -46,31 +48,54 @@ class CrearUnaCuenta extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   InputForm(
-                    hintText: 'Documento de identidad',
+                    hintText: 'Número de identificación',
                     controlador: _cedulaController,
                     obscureText: false,
+                    inputType: TextInputType.number,
+                    icono: Icons.numbers,
                   ),
                   InputForm(
                     hintText: 'Nombres',
                     controlador: _nombreController,
                     obscureText: false,
+                    inputType: TextInputType.name,
+                    icono: Icons.abc,
                   ),
                   InputForm(
-                      hintText: 'Apellidos',
-                      controlador: _apellidosController,
-                      obscureText: false),
+                    hintText: 'Apellidos',
+                    controlador: _apellidosController,
+                    obscureText: false,
+                    inputType: TextInputType.name,
+                    icono: Icons.abc,
+                  ),
                   InputForm(
-                      hintText: 'Correo electrónico',
-                      controlador: _correoController,
-                      obscureText: false),
+                    hintText: 'Correo electrónico',
+                    controlador: _correoController,
+                    obscureText: false,
+                    inputType: TextInputType.emailAddress,
+                    icono: Icons.email,
+                  ),
                   InputForm(
-                      hintText: 'Contraseña',
-                      controlador: _contraseniaController,
-                      obscureText: true),
+                    hintText: 'Celular',
+                    controlador: _celularController,
+                    obscureText: false,
+                    inputType: TextInputType.number,
+                    icono: Icons.phone,
+                  ),
                   InputForm(
-                      hintText: 'Confirmar contraseña',
-                      controlador: _confirmcontraseniaController,
-                      obscureText: true),
+                    hintText: 'Contraseña',
+                    controlador: _contraseniaController,
+                    obscureText: true,
+                    inputType: TextInputType.text,
+                    icono: Icons.key,
+                  ),
+                  InputForm(
+                    hintText: 'Confirmar contraseña',
+                    controlador: _confirmcontraseniaController,
+                    obscureText: true,
+                    inputType: TextInputType.text,
+                    icono: Icons.key,
+                  ),
                   const SizedBox(
                     height: 30,
                   ),
@@ -100,13 +125,13 @@ class CrearUnaCuenta extends StatelessWidget {
 
                       // Resto del código para crear la cuenta
                       gestionUsuario.crearUsuario(
-                        _nombreController.text,
-                        _apellidosController.text,
-                        _correoController.text,
-                        _contraseniaController.text,
-                        _confirmcontraseniaController.text,
-                        _cedulaController.text,
-                      );
+                          _nombreController.text,
+                          _apellidosController.text,
+                          _correoController.text,
+                          _contraseniaController.text,
+                          _confirmcontraseniaController.text,
+                          _cedulaController.text,
+                          _celularController.text);
 
                       Navigator.push(
                         context,

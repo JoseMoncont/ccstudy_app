@@ -89,7 +89,7 @@ class RespuestaCrearUsuarioScreen extends StatelessWidget {
   Widget _buildErrorUI(String errorMessage) {
     // Construye la interfaz de usuario para el estado de error
     return Scaffold(
-      backgroundColor: const Color(0xff271789),
+      backgroundColor: colorBG,
       appBar: appBar(),
       body: Container(
         alignment: Alignment.center,

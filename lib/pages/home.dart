@@ -1,8 +1,10 @@
 import 'package:ccstudy_app/pages/tipos_resultados.dart';
+import 'package:ccstudy_app/providers/iniciar_sesion_provider.dart';
 import 'package:ccstudy_app/widgets/botones.dart';
 import 'package:ccstudy_app/widgets/generales.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
+import 'package:provider/provider.dart';
 
 class Home extends StatelessWidget {
   const Home({super.key});
@@ -10,26 +12,61 @@ class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: appBar(),
-      backgroundColor: const Color(0xff271789),
-      body: Column(mainAxisAlignment: MainAxisAlignment.start, children: [
+        appBar: appBar(),
+        backgroundColor: const Color(0xff271789),
+        body: _build());
+  }
+
+  _build() {
+    return Consumer<LoginProvider>(
+      builder: (context, loginProvider, child) {
+        // Verifica el estado actual y actualiza la interfaz de usuario en consecuencia
+        switch (loginProvider.estado) {
+          case LoginState.Loading:
+            return _buildLoadingUI();
+          case LoginState.Loaded:
+            return _buildLoadedUI(context);
+          case LoginState.Empty:
+            return _buildEmptyUI();
+          case LoginState.Error:
+            return _buildErrorUI(loginProvider.errorMensaje);
+          default:
+            return Container(); // Maneja cualquier otro caso según tus necesidades
+        }
+      },
+    );
+  }
+
+  _buildLoadingUI() {
+    return const Center(
+      child: CircularProgressIndicator(
+        color: Colors.white,
+      ),
+    );
+  }
+
+  _buildLoadedUI(BuildContext context) {
+    final loginUsuario = Provider.of<LoginProvider>(context);
+    final datosUsuario = loginUsuario.datosUsuario.record!.data;
+    return SingleChildScrollView(
+      child: Column(mainAxisAlignment: MainAxisAlignment.start, children: [
         Container(
           margin: const EdgeInsets.symmetric(vertical: 13.0, horizontal: 25.0),
           alignment: Alignment.bottomLeft,
-          child: const Column(
+          child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                "Bienvenido",
+              const Text(
+                "Bienvenido(a)",
                 style: TextStyle(color: Colors.white),
                 textAlign: TextAlign.left,
               ),
               Text(
-                "Braizon",
-                style: TextStyle(
+                datosUsuario["nombres"],
+                style: const TextStyle(
                     color: Colors.white,
-                    fontSize: 20,
+                    fontSize: 30,
                     fontWeight: FontWeight.bold),
               ),
             ],
@@ -42,7 +79,8 @@ class Home extends StatelessWidget {
               //height: 200,
               margin:
                   const EdgeInsets.symmetric(vertical: 13.0, horizontal: 25.0),
-              child: Lottie.asset('assets/animations/tomademuestra.json'),
+              child: Lottie.asset('assets/animations/tomademuestra.json',
+                  height: MediaQuery.of(context).size.height / 3),
             ),
             Container(
               margin:
@@ -56,7 +94,7 @@ class Home extends StatelessWidget {
                 margin: const EdgeInsets.symmetric(
                     vertical: 13.0, horizontal: 25.0),
                 child: BotonPrimario(
-                    texto: 'Consultar resultados',
+                    texto: 'Consultar mis resultados',
                     onPressed: () {
                       Navigator.push(
                           context,
@@ -64,11 +102,31 @@ class Home extends StatelessWidget {
                               builder: (context) => const Updatedata()));
                     }))
           ],
-        ),
-        SizedBox(
-          height: 30,
         )
       ]),
+    );
+  }
+
+  _buildEmptyUI() {}
+
+  _buildErrorUI(errorMensaje) {
+    return Container(
+      alignment: Alignment.center,
+      margin: const EdgeInsets.symmetric(horizontal: 30),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Lottie.asset('assets/animations/error.json', width: 120),
+          Text(
+            errorMensaje,
+            style: const TextStyle(
+              color: Colors.white,
+              fontSize: 18,
+            ),
+            textAlign: TextAlign.center,
+          ),
+        ],
+      ),
     );
   }
 }
