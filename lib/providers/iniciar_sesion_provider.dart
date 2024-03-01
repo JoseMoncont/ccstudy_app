@@ -12,6 +12,7 @@ class LoginProvider extends ChangeNotifier {
   LoginState _estado = LoginState.Empty;
   String _errorMensaje = '';
   RecordAuth datosUsuario = RecordAuth();
+  String? usuarioId = '';
 
   LoginState get estado => _estado;
   String get errorMensaje => _errorMensaje;
@@ -30,6 +31,7 @@ class LoginProvider extends ChangeNotifier {
           );
 
       datosUsuario = authData;
+      usuarioId = datosUsuario.record?.id;
 
       // pb.authStore.isValid
       //     ? _cambiarEstado(LoginState.Loaded)

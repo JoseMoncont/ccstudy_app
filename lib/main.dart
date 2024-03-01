@@ -1,6 +1,7 @@
 import 'package:ccstudy_app/pages/login.dart';
 import 'package:ccstudy_app/providers/crear_usuario_provider.dart';
 import 'package:ccstudy_app/providers/iniciar_sesion_provider.dart';
+import 'package:ccstudy_app/providers/usuario_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -31,7 +32,8 @@ class AppState extends StatelessWidget {
         ),
         ChangeNotifierProvider(
           create: (_) => LoginProvider(),
-        )
+        ),
+        ChangeNotifierProvider(create: (_) => UsuarioProvider())
       ],
       child: MyApp(),
     );
