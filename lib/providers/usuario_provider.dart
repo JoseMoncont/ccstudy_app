@@ -7,25 +7,49 @@ import 'package:pocketbase/pocketbase.dart';
 enum UsuarioState { Loading, Loaded, Empty, Error }
 
 class UsuarioProvider extends ChangeNotifier {
-  final pb = PocketBase('http://127.0.0.1:8090');
+  final pb = PocketBase('https://ccstudy.pockethost.io');
   // Variables para el manejo de estado
   UsuarioState _estado = UsuarioState.Empty;
   String _errorMensaje = '';
   RecordModel datosUsuario = RecordModel();
+  String urlDocQuimSang = '';
+  String urlDocEcodopler = '';
+  String urlDocEspirometria = '';
 
   UsuarioState get estado => _estado;
   String get errorMensaje => _errorMensaje;
 
-  Future<void> consultarUsuario(
-    String id,
-  ) async {
+  Future<void> consultarUsuario(String id, token) async {
     // Cambiar el estado a Loading al comenzar la operación
     _cambiarEstado(UsuarioState.Loading);
 
     try {
-      final record = await pb.collection('users').getOne(id);
+      final record = await pb.collection('users').getOne(id, headers: {
+        'Authorization': 'Bearer $token',
+      });
 
-      print(record);
+      //OBTENER DOCUMENTOS
+
+      // QUIMICA SANGUINEA ------------------------------------------------------------
+
+      final urlDocQS = record.getListValue<String>('doc_quimsang')[0];
+      final urlDocQSResponse =
+          pb.files.getUrl(record, urlDocQS, thumb: '100x250');
+      urlDocQuimSang = urlDocQSResponse.toString();
+
+      // ECODOPLER ---------------------------------------------------------------------
+
+      final urlDocEco = record.getListValue<String>('doc_ecodopler')[0];
+      final urlDocEcoResponse =
+          pb.files.getUrl(record, urlDocEco, thumb: '100x250');
+      urlDocEcodopler = urlDocEcoResponse.toString();
+
+      // ESPIROMETRIA -------------------------------------------------------------------
+
+      final urlDocEspiro = record.getListValue<String>('doc_espirom')[0];
+      final urlDocEspiroResponse =
+          pb.files.getUrl(record, urlDocEspiro, thumb: '100x250');
+      urlDocEspirometria = urlDocEspiroResponse.toString();
 
       // Cambiar el estado a Loaded cuando la operación es exitosa
       _cambiarEstado(UsuarioState.Loaded);

@@ -66,7 +66,8 @@ class Home extends StatelessWidget {
             ),
             IconButton(
                 onPressed: () {
-                  usuarioProvider.consultarUsuario('${loginUsuario.usuarioId}');
+                  usuarioProvider.consultarUsuario('${loginUsuario.usuarioId}',
+                      loginUsuario.pb.authStore.token);
                   Navigator.push(
                       context,
                       MaterialPageRoute(
@@ -129,6 +130,9 @@ class Home extends StatelessWidget {
                   child: BotonPrimario(
                       texto: 'Consultar mis resultados',
                       onPressed: () {
+                        usuarioProvider.consultarUsuario(
+                            '${loginUsuario.usuarioId}',
+                            loginUsuario.pb.authStore.token);
                         Navigator.push(
                             context,
                             MaterialPageRoute(

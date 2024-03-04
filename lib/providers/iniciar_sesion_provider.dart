@@ -7,7 +7,7 @@ import 'package:pocketbase/pocketbase.dart';
 enum LoginState { Loading, Loaded, Empty, Error }
 
 class LoginProvider extends ChangeNotifier {
-  final pb = PocketBase('http://10.0.2.2:8090');
+  final pb = PocketBase('https://ccstudy.pockethost.io');
   // Variables para el manejo de estado
   LoginState _estado = LoginState.Empty;
   String _errorMensaje = '';

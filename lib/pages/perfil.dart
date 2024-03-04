@@ -1,4 +1,3 @@
-import 'package:ccstudy_app/providers/usuario_provider.dart';
 import 'package:ccstudy_app/widgets/botones.dart';
 import 'package:ccstudy_app/widgets/generales.dart';
 import 'package:flutter/material.dart';
@@ -71,7 +70,7 @@ class PerfilUsuarioScreen extends StatelessWidget {
                     ),
                     Padding(
                       padding: const EdgeInsets.symmetric(
-                          horizontal: 10, vertical: 5),
+                          horizontal: 30, vertical: 5),
                       child: Row(
                         children: [
                           const Icon(
@@ -90,7 +89,7 @@ class PerfilUsuarioScreen extends StatelessWidget {
                     ),
                     Padding(
                       padding: const EdgeInsets.symmetric(
-                          horizontal: 10, vertical: 5),
+                          horizontal: 30, vertical: 5),
                       child: Row(
                         children: [
                           const Icon(
@@ -106,9 +105,15 @@ class PerfilUsuarioScreen extends StatelessWidget {
                           )
                         ],
                       ),
-                    )
+                    ),
+                    const SizedBox(
+                      height: 5,
+                    ),
                   ],
                 ),
+              ),
+              const SizedBox(
+                height: 5,
               ),
               Container(
                 margin:

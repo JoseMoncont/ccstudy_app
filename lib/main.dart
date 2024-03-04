@@ -1,4 +1,5 @@
 import 'package:ccstudy_app/pages/login.dart';
+import 'package:ccstudy_app/pages/ver_documento.dart';
 import 'package:ccstudy_app/providers/crear_usuario_provider.dart';
 import 'package:ccstudy_app/providers/iniciar_sesion_provider.dart';
 import 'package:ccstudy_app/providers/usuario_provider.dart';
@@ -47,12 +48,14 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        title: 'ccstudy',
-        debugShowCheckedModeBanner: false,
-        theme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xff271789)),
-          useMaterial3: true,
-        ),
-        home: LoginPage());
+      title: 'ccstudy',
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xff271789)),
+        useMaterial3: true,
+      ),
+      home: LoginPage(),
+      routes: {"verPdf": (context) => VerDocumento()},
+    );
   }
 }
