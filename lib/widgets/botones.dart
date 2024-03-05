@@ -16,7 +16,7 @@ class BotonPrimario extends StatelessWidget {
         child: ElevatedButton(
           onPressed: onPressed,
           style: ElevatedButton.styleFrom(
-              backgroundColor: Color.fromARGB(255, 105, 215, 255),
+              backgroundColor: const Color.fromARGB(255, 105, 215, 255),
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10))),
           child: Text(
@@ -44,7 +44,7 @@ class BotonPrimarioCargando extends StatelessWidget {
                 backgroundColor: const Color(0xff040346),
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10))),
-            child: CircularProgressIndicator()));
+            child: const CircularProgressIndicator()));
   }
 }
 
@@ -84,7 +84,7 @@ class BotonResultado extends StatelessWidget {
               height: 50,
               child: Text(
                 titulo,
-                style: TextStyle(
+                style: const TextStyle(
                     fontWeight: FontWeight.bold,
                     letterSpacing: -0.2,
                     fontSize: 15),
@@ -145,40 +145,45 @@ class BotonOpcion extends StatelessWidget {
         width: MediaQuery.of(context).size.width,
         child: Column(
           children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Container(
-                  margin: EdgeInsets.symmetric(vertical: 0),
-                  child: Row(
-                    children: [
-                      Container(
-                        padding: EdgeInsets.all(5),
-                        decoration: BoxDecoration(
-                            color: Color.fromARGB(255, 72, 9, 160),
-                            borderRadius: BorderRadius.circular(10)),
-                        child: Icon(
-                          icono,
-                          color: Colors.white,
+            InkWell(
+              onTap: onPressed,
+              borderRadius: BorderRadius.circular(10),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Container(
+                    margin: const EdgeInsets.symmetric(vertical: 0),
+                    child: Row(
+                      children: [
+                        Container(
+                          padding: const EdgeInsets.all(5),
+                          decoration: BoxDecoration(
+                              color: const Color.fromARGB(255, 72, 9, 160),
+                              borderRadius: BorderRadius.circular(10)),
+                          child: Icon(
+                            icono,
+                            color: Colors.white,
+                          ),
                         ),
-                      ),
-                      SizedBox(
-                        width: 20,
-                      ),
-                      Text(
-                        texto,
-                        style: TextStyle(color: Colors.white, fontSize: 18),
-                      )
-                    ],
+                        const SizedBox(
+                          width: 20,
+                        ),
+                        Text(
+                          texto,
+                          style: const TextStyle(
+                              color: Colors.white, fontSize: 18),
+                        )
+                      ],
+                    ),
                   ),
-                ),
-                Icon(
-                  Icons.arrow_forward_ios,
-                  color: Colors.white,
-                )
-              ],
+                  const Icon(
+                    Icons.arrow_forward_ios,
+                    color: Colors.white,
+                  )
+                ],
+              ),
             ),
-            Divider(
+            const Divider(
               color: Color.fromARGB(255, 37, 10, 107),
             )
           ],

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 espacioH3() {
-  return SizedBox(
+  return const SizedBox(
     height: 30,
   );
 }

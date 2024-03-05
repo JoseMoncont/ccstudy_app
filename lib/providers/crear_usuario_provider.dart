@@ -25,10 +25,6 @@ class GestionUsuarioProvider extends ChangeNotifier {
     // Cambiar el estado a Loading al comenzar la operación
     _cambiarEstado(UsuarioState.Loading);
 
-    final baseUrl = 'http://10.0.2.2:8090';
-
-    final _url = Uri.parse(baseUrl + '/api/collections/users/records');
-
     try {
       final body = <String, dynamic>{
         "username": cedula,
@@ -56,8 +52,7 @@ class GestionUsuarioProvider extends ChangeNotifier {
         _cambiarEstado(UsuarioState.Error, error.response['message']);
       }
       // Capturar errores y cambiar el estado a Error
-      _cambiarEstado(UsuarioState.Error,
-          'Ocurrió un error desconocido, por favor contáctese con soporte');
+      _cambiarEstado(UsuarioState.Error, error.toString());
       print(error);
     }
   }

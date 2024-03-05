@@ -1,3 +1,4 @@
+import 'package:animate_do/animate_do.dart';
 import 'package:ccstudy_app/widgets/botones.dart';
 import 'package:ccstudy_app/widgets/generales.dart';
 import 'package:flutter/material.dart';
@@ -55,58 +56,69 @@ class Updatedata extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Padding(
-          padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-          child: Text(
-            'Resultados',
-            style: TextStyle(
-                color: Colors.white, fontWeight: FontWeight.bold, fontSize: 25),
-            textAlign: TextAlign.start,
+        FadeInUp(
+          delay: const Duration(milliseconds: 100),
+          child: const Padding(
+            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+            child: Text(
+              'Resultados',
+              style: TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 25),
+              textAlign: TextAlign.start,
+            ),
           ),
         ),
-        const Padding(
-          padding: EdgeInsets.symmetric(horizontal: 20, vertical: 0),
-          child: Text(
-            'Seleccione el tipo de resultado que desea conocer:',
-            style: TextStyle(color: Colors.white),
+        FadeInUp(
+          delay: const Duration(milliseconds: 200),
+          child: const Padding(
+            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 0),
+            child: Text(
+              'Seleccione el tipo de resultado que desea conocer:',
+              style: TextStyle(color: Colors.white),
+            ),
           ),
         ),
-        GridView.count(
-          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-          shrinkWrap: true,
-          crossAxisCount: 2,
-          children: [
-            BotonResultado(
-              titulo: 'Quimica Sanguínea',
-              icono: SvgPicture.asset(
-                'assets/images/vial-solid.svg',
-                width: 30,
+        FadeInUp(
+          delay: const Duration(milliseconds: 300),
+          child: GridView.count(
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+            shrinkWrap: true,
+            crossAxisCount: 2,
+            children: [
+              BotonResultado(
+                titulo: 'Quimica Sanguínea',
+                icono: SvgPicture.asset(
+                  'assets/images/vial-solid.svg',
+                  width: 30,
+                ),
+                alPresionar: () {
+                  Navigator.pushNamed(context, 'verPdf', arguments: docQS);
+                },
               ),
-              alPresionar: () {
-                Navigator.pushNamed(context, 'verPdf', arguments: docQS);
-              },
-            ),
-            BotonResultado(
-              titulo: 'Espirometría',
-              icono: SvgPicture.asset(
-                'assets/images/lung.svg',
-                width: 40,
+              BotonResultado(
+                titulo: 'Espirometría',
+                icono: SvgPicture.asset(
+                  'assets/images/lung.svg',
+                  width: 40,
+                ),
+                alPresionar: () {
+                  Navigator.pushNamed(context, 'verPdf', arguments: docEspiro);
+                },
               ),
-              alPresionar: () {
-                Navigator.pushNamed(context, 'verPdf', arguments: docEspiro);
-              },
-            ),
-            BotonResultado(
-              titulo: 'Eco Doppler Carotídeo',
-              icono: SvgPicture.asset(
-                'assets/images/vein.svg',
-                width: 40,
-              ),
-              alPresionar: () {
-                Navigator.pushNamed(context, 'verPdf', arguments: docEco);
-              },
-            )
-          ],
+              BotonResultado(
+                titulo: 'Eco Doppler Carotídeo',
+                icono: SvgPicture.asset(
+                  'assets/images/vein.svg',
+                  width: 40,
+                ),
+                alPresionar: () {
+                  Navigator.pushNamed(context, 'verPdf', arguments: docEco);
+                },
+              )
+            ],
+          ),
         ),
       ],
     );

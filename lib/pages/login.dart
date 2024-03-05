@@ -44,10 +44,9 @@ class LoginPage extends StatelessWidget {
                       inputType: TextInputType.number,
                       icono: Icons.person,
                     ),
-                    InputForm(
+                    InputFormPass(
                       hintText: 'Contraseña',
                       controlador: _passwordController,
-                      obscureText: true,
                       inputType: TextInputType.text,
                       icono: Icons.key,
                     ),

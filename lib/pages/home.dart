@@ -1,3 +1,4 @@
+import 'package:animate_do/animate_do.dart';
 import 'package:ccstudy_app/pages/perfil.dart';
 import 'package:ccstudy_app/pages/tipos_resultados.dart';
 import 'package:ccstudy_app/providers/iniciar_sesion_provider.dart';
@@ -83,62 +84,68 @@ class Home extends StatelessWidget {
       backgroundColor: colorBG,
       body: SingleChildScrollView(
         child: Column(mainAxisAlignment: MainAxisAlignment.start, children: [
-          Container(
-            margin:
-                const EdgeInsets.symmetric(vertical: 13.0, horizontal: 25.0),
-            alignment: Alignment.bottomLeft,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const Text(
-                  "Bienvenido(a)",
-                  style: TextStyle(color: Colors.white),
-                  textAlign: TextAlign.left,
-                ),
-                Text(
-                  datosUsuario["nombres"],
-                  style: const TextStyle(
-                      color: Colors.white,
-                      fontSize: 30,
-                      fontWeight: FontWeight.bold),
-                ),
-              ],
+          FadeInUp(
+            delay: const Duration(milliseconds: 100),
+            child: Container(
+              margin:
+                  const EdgeInsets.symmetric(vertical: 13.0, horizontal: 25.0),
+              alignment: Alignment.bottomLeft,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text(
+                    "Bienvenido(a)",
+                    style: TextStyle(color: Colors.white),
+                    textAlign: TextAlign.left,
+                  ),
+                  Text(
+                    datosUsuario["nombres"],
+                    style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 30,
+                        fontWeight: FontWeight.bold),
+                  ),
+                ],
+              ),
             ),
           ),
-          Column(
-            children: [
-              Container(
-                width: MediaQuery.of(context).size.width,
-                //height: 200,
-                margin: const EdgeInsets.symmetric(
-                    vertical: 13.0, horizontal: 25.0),
-                child: Lottie.asset('assets/animations/tomademuestra.json',
-                    height: MediaQuery.of(context).size.height / 3),
-              ),
-              Container(
-                margin: const EdgeInsets.symmetric(
-                    vertical: 13.0, horizontal: 25.0),
-                child: const Text(
-                  "En los siguientes resultados podrá encontar información detallada acerca de su estado de salud",
-                  style: TextStyle(color: Colors.white),
-                ),
-              ),
-              Container(
+          FadeInUp(
+            delay: const Duration(milliseconds: 200),
+            child: Column(
+              children: [
+                Container(
+                  width: MediaQuery.of(context).size.width,
+                  //height: 200,
                   margin: const EdgeInsets.symmetric(
                       vertical: 13.0, horizontal: 25.0),
-                  child: BotonPrimario(
-                      texto: 'Consultar mis resultados',
-                      onPressed: () {
-                        usuarioProvider.consultarUsuario(
-                            '${loginUsuario.usuarioId}',
-                            loginUsuario.pb.authStore.token);
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const Updatedata()));
-                      }))
-            ],
+                  child: Lottie.asset('assets/animations/tomademuestra.json',
+                      height: MediaQuery.of(context).size.height / 3),
+                ),
+                Container(
+                  margin: const EdgeInsets.symmetric(
+                      vertical: 13.0, horizontal: 25.0),
+                  child: const Text(
+                    "En los siguientes resultados podrá encontar información detallada acerca de su estado de salud",
+                    style: TextStyle(color: Colors.white),
+                  ),
+                ),
+                Container(
+                    margin: const EdgeInsets.symmetric(
+                        vertical: 13.0, horizontal: 25.0),
+                    child: BotonPrimario(
+                        texto: 'Consultar mis resultados',
+                        onPressed: () {
+                          usuarioProvider.consultarUsuario(
+                              '${loginUsuario.usuarioId}',
+                              loginUsuario.pb.authStore.token);
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const Updatedata()));
+                        }))
+              ],
+            ),
           )
         ]),
       ),

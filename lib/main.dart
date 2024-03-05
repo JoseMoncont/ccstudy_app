@@ -1,3 +1,4 @@
+import 'package:ccstudy_app/pages/home.dart';
 import 'package:ccstudy_app/pages/login.dart';
 import 'package:ccstudy_app/pages/ver_documento.dart';
 import 'package:ccstudy_app/providers/crear_usuario_provider.dart';
@@ -55,7 +56,11 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       home: LoginPage(),
-      routes: {"verPdf": (context) => VerDocumento()},
+      routes: {
+        "verPdf": (context) => VerDocumento(),
+        "home": (context) => const Home(),
+        "login": (context) => LoginPage()
+      },
     );
   }
 }
