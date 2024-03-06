@@ -1,5 +1,9 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:ccstudy_app/pages/about.dart';
+import 'package:ccstudy_app/pages/cambiar_contrase%C3%B1a.dart';
+import 'package:ccstudy_app/pages/eliminacion_cuenta.dart';
+import 'package:ccstudy_app/providers/eliminar_usuario.dart';
+import 'package:ccstudy_app/widgets/alerts.dart';
 import 'package:ccstudy_app/widgets/botones.dart';
 import 'package:ccstudy_app/widgets/generales.dart';
 import 'package:flutter/material.dart';
@@ -14,6 +18,7 @@ class PerfilUsuarioScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final loginUsuario = Provider.of<LoginProvider>(context);
     final datosUsuario = loginUsuario.datosUsuario.record!.data;
+    final eliminarUser = Provider.of<EliminarUsuarioProvider>(context);
     return Scaffold(
       backgroundColor: colorBG,
       appBar: appBar(),
@@ -126,7 +131,12 @@ class PerfilUsuarioScreen extends StatelessWidget {
                     children: [
                       BotonOpcion(
                         texto: 'Cambiar contraseña',
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => CambiarContrasenia()));
+                        },
                         icono: Icons.key,
                       ),
                       BotonOpcion(
@@ -144,7 +154,23 @@ class PerfilUsuarioScreen extends StatelessWidget {
                       ),
                       BotonOpcion(
                         texto: 'Eliminar cuenta',
-                        onPressed: () {},
+                        onPressed: () {
+                          mostrarAlertDialogDelete(
+                              context,
+                              'Eliminar Cuenta',
+                              'Tus datos, incluyendo los resultados de laboratorio serán eliminados de tu cuenta.',
+                              '¿Estás seguro que deseas eliminar la cuenta?',
+                              () {
+                            eliminarUser.eliminarUsuario(
+                                loginUsuario.usuarioId.toString(),
+                                loginUsuario.pb.authStore.token);
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        const EliminarCuentaPage()));
+                          });
+                        },
                         icono: Icons.delete,
                       ),
                     ],

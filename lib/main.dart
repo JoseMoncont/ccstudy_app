@@ -1,7 +1,9 @@
 import 'package:ccstudy_app/pages/home.dart';
 import 'package:ccstudy_app/pages/login.dart';
 import 'package:ccstudy_app/pages/ver_documento.dart';
+import 'package:ccstudy_app/providers/cambiar_contrasenia.dart';
 import 'package:ccstudy_app/providers/crear_usuario_provider.dart';
+import 'package:ccstudy_app/providers/eliminar_usuario.dart';
 import 'package:ccstudy_app/providers/iniciar_sesion_provider.dart';
 import 'package:ccstudy_app/providers/usuario_provider.dart';
 import 'package:flutter/material.dart';
@@ -35,7 +37,9 @@ class AppState extends StatelessWidget {
         ChangeNotifierProvider(
           create: (_) => LoginProvider(),
         ),
-        ChangeNotifierProvider(create: (_) => UsuarioProvider())
+        ChangeNotifierProvider(create: (_) => UsuarioProvider()),
+        ChangeNotifierProvider(create: (_) => EliminarUsuarioProvider()),
+        ChangeNotifierProvider(create: (_) => CambiarContraseniaProvider())
       ],
       child: MyApp(),
     );

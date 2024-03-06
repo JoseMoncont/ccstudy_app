@@ -20,7 +20,7 @@ class _AboutState extends State<About> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           FadeInUp(
-            delay: const Duration(milliseconds: 300),
+            delay: const Duration(milliseconds: 200),
             child: Container(
               alignment: Alignment.center,
               child: ClipRRect(
@@ -43,7 +43,7 @@ class _AboutState extends State<About> {
             height: 20,
           ),
           FadeInUp(
-            delay: const Duration(milliseconds: 400),
+            delay: const Duration(milliseconds: 300),
             child: const Column(
               children: [
                 Text(
@@ -67,7 +67,7 @@ class _AboutState extends State<About> {
             ),
           ),
           FadeInUp(
-            delay: const Duration(milliseconds: 500),
+            delay: const Duration(milliseconds: 400),
             child: const Column(
               children: [
                 Text(
