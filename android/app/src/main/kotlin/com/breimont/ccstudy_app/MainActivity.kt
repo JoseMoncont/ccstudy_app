@@ -1,4 +1,4 @@
-package com.example.ccstudy_app
+package com.breimont.ccstudy_app
 
 import io.flutter.embedding.android.FlutterActivity
 

@@ -129,16 +129,16 @@ class PerfilUsuarioScreen extends StatelessWidget {
                       const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
                   child: Column(
                     children: [
-                      BotonOpcion(
-                        texto: 'Cambiar contraseña',
-                        onPressed: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => CambiarContrasenia()));
-                        },
-                        icono: Icons.key,
-                      ),
+                      // BotonOpcion(
+                      //   texto: 'Cambiar contraseña',
+                      //   onPressed: () {
+                      //     Navigator.push(
+                      //         context,
+                      //         MaterialPageRoute(
+                      //             builder: (context) => CambiarContrasenia()));
+                      //   },
+                      //   icono: Icons.key,
+                      // ),
                       BotonOpcion(
                         texto: 'Soporte',
                         onPressed: () {},

@@ -54,7 +54,7 @@ class _AboutState extends State<About> {
                       fontWeight: FontWeight.bold),
                 ),
                 Text(
-                  'V 1.0.0',
+                  'V 1.0.4',
                   style: TextStyle(
                       color: Colors.white,
                       fontSize: 18,
